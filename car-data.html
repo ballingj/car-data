@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+</style>
+<body>
+
+<p>Click on a Car to display album information.</p>
+<p id='showCar'></p>
+<table id="demo"></table>
+
+<script>
+var x,xmlhttp,xmlDoc
+xmlhttp = new XMLHttpRequest();
+xmlhttp.open("GET", "car-data.xml", false);
+xmlhttp.send();
+xmlDoc = xmlhttp.responseXML; 
+x = xmlDoc.getElementsByTagName("record");
+table="<tr><th>Year</th><th>Make</th><th>Model</th><th>Value</th></tr>";
+for (i = 0; i <x.length; i++) { 
+  table += "<tr onclick='displayCar(" + i + ")'><td>";
+  table += x[i].getElementsByTagName("year")[0].childNodes[0].nodeValue;
+  table += "</td><td>";
+  table +=  x[i].getElementsByTagName("make")[0].childNodes[0].nodeValue;
+  table += "</td><td>";
+  table +=  x[i].getElementsByTagName("model")[0].childNodes[0].nodeValue;
+  table += "</td><td>";
+  table +=  x[i].getElementsByTagName("value")[0].childNodes[0].nodeValue;
+  table += "</td></tr>";
+}
+document.getElementById("demo").innerHTML = table;
+
+function displayCar(i) {
+  document.getElementById("showCar").innerHTML =
+  "Year: " +
+  x[i].getElementsByTagName("year")[0].childNodes[0].nodeValue +
+  "<br>Make: " +
+  x[i].getElementsByTagName("make")[0].childNodes[0].nodeValue +
+  "<br>Model: " + 
+  x[i].getElementsByTagName("model")[0].childNodes[0].nodeValue +
+  "<br>Value: " + 
+  x[i].getElementsByTagName("value")[0].childNodes[0].nodeValue;
+}
+</script>
+
+</body>
+</html>
