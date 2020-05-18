@@ -11,7 +11,7 @@ th,td {
 </style>
 <body>
 
-<p>Click on a Car to display car information.</p>
+<p>Click on a Car to display the car's Price.</p>
 <p id='showCar'></p>
 <table id="demo"></table>
 
@@ -22,7 +22,7 @@ xmlhttp.open("GET", "car-data.xml", false);
 xmlhttp.send();
 xmlDoc = xmlhttp.responseXML; 
 x = xmlDoc.getElementsByTagName("record");
-table="<tr><th>Year</th><th>Make</th><th>Model</th><th>Value</th></tr>";
+table="<tr><th>Year</th><th>Make</th><th>Model</th></tr>";
 for (i = 0; i <x.length; i++) { 
   table += "<tr onclick='displayCar(" + i + ")'><td>";
   table += x[i].getElementsByTagName("year")[0].childNodes[0].nodeValue;
@@ -30,8 +30,6 @@ for (i = 0; i <x.length; i++) {
   table +=  x[i].getElementsByTagName("make")[0].childNodes[0].nodeValue;
   table += "</td><td>";
   table +=  x[i].getElementsByTagName("model")[0].childNodes[0].nodeValue;
-  table += "</td><td>";
-  table +=  x[i].getElementsByTagName("value")[0].childNodes[0].nodeValue;
   table += "</td></tr>";
 }
 document.getElementById("demo").innerHTML = table;
